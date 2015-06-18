@@ -50,3 +50,6 @@ function initData($http,$scope,$rootScope){
 		$rootScope.$broadcast('todo/newData',data);
 	});
 }
+
+
+//added some comment
