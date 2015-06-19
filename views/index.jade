@@ -7,4 +7,4 @@ block content
       h3(hello-world)
       ul.todo-list
         li( ng-repeat='rec in todoRecs', ng-click='todoClick($index)', ng-class="{ 'done' : rec.done }" )
-           div(id="{{ rec._id }}",rec-world, recDone="rec.done"){{rec.name}}
+           div(id="{{ rec._id }}",rec-world="rec.done"){{rec.name}}

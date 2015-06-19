@@ -1,9 +1,9 @@
 var app = angular.module('toDOApp',[]);
 
-app.controller('ToDOCtrl',['$scope','$http','$rootScope',function($scope,$http,$rootScope){
+app.controller('ToDOCtrl',['$scope','$http','$rootScope','myFac',function($scope,$http,$rootScope,myFac){
 	var postObj;
 
-	initData($http,$scope,$rootScope);
+	myFac.initData();
 
 	$http.get('/records/todo').success(function(data){
 		$scope.todoRecs = data;
@@ -14,7 +14,7 @@ app.controller('ToDOCtrl',['$scope','$http','$rootScope',function($scope,$http,$
 		postObj = {'name':$scope.toDoText,done:false};
 		$scope.toDoText = '';
 		$http.post('/records/update',postObj).success(function(data){
-			initData($http,$scope,$rootScope);
+			myFac.initData();
 		});
 		
 	};
@@ -44,12 +44,15 @@ app.directive('recWorld',[ '$http',function($http) {
     }
   };
 }]);
-
-function initData($http,$scope,$rootScope){
-	$http.get('/records/todo').success(function(data){
-		$rootScope.$broadcast('todo/newData',data);
-	});
-}
+app.factory('myFac',['$rootScope','$http',function(root,http){
+	return{
+		initData : function(){
+			http.get('/records/todo').success(function(data){
+				root.$broadcast('todo/newData',data);
+			});
+		}
+	}
+}])
 
 
 //added some comment
