@@ -40,6 +40,19 @@ app.get('/records/todo',function( rq,res ){
     });
 });
 
+
+app.get('/todo/delete',function(req,res){
+  db.shouvik.remove({done:true},function(err,doc){
+    res.send(doc);
+  })
+});
+
+app.get('/todo/active',function(req,res){
+  db.shouvik.find({done:false} , (function(err, doc){   
+          res.send(doc);
+  }) );
+})
+
 app.post('/records/getone',function(req,res){
   
   //res.send(req.body.id);

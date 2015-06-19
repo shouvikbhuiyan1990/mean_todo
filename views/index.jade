@@ -7,4 +7,8 @@ block content
       h3(hello-world)
       ul.todo-list
         li( ng-repeat='rec in todoRecs', ng-click='todoClick($index)', ng-class="{ 'done' : rec.done }" )
-           div(id="{{ rec._id }}",rec-world="rec.done"){{rec.name}}
+           rec-world(id="{{ rec._id }}",class="record"){{rec.name}}
+    p Total Active count is {{activeCount}}
+    button(ng-click='viewAll()') View All
+    button(ng-click='deleteDone()') Delete Done
+    button(ng-click='showActive()') Active
