@@ -56,15 +56,15 @@ app.directive('recWorld',[ '$http','myFac',function($http,myFac) {
     link : function(scope,elem,attr){
     	var reqObj = {};
     	elem.bind('click',function(){
-    		myFac.updateCount().success(function(data){
-    			scope.$parent.activeCount = data.length-1;
-    		})
+    		
     		reqObj.id = $(this).attr('id');
     		$http.post('/records/getone',reqObj).success(function(data){
     			reqObj.doneCount = data.done;
     			scope.rec.done = !data.done;
     			$http.post('/records/modify',reqObj).success(function(innerData){
-    				//console.log(innerData);
+    				myFac.updateCount().success(function(data){
+		    			scope.$parent.activeCount = data.length;
+		    		})
     			})
     		});
     	})
